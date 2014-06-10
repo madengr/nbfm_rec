@@ -12,15 +12,15 @@ Features:
 
 
 Tested with: 
-GNU Radio 3.7
-Ettus N210 + WBX
-Ettus B200
+- GNU Radio 3.7
+- Ettus N210 + WBX
+- Ettus B200
 
 Notes:
 
 Run with -h for help
 
-Channels (in Hz) are read from channels.txt newline delimited file
+Channels (in Hz) are read from channels.txt newline delimited file.
 Suggest starting with 162.55E6 for local NOAA radio or 144.39E6 for APRS
 
 Keep adding channels as long as they are within the 25 MHz sample rate
