@@ -36,7 +36,7 @@ Use with the Ettus N210 + WBX:
 Use with the Ettus B200:
 *./nbfm_rec.py --args="type=b200, master_clock_rate=25E6" --gain=50 -v*
 
-Note the program was developed with the N210 which has a maximum sample rate
+Note the program was developed with the N210 which has a maximum bandwidth
 of 25 MHz, therefore the B200 master clock should be set to 25E6.
 
 nbfm_rec_diagram.asciio is the ASCIIO block diagram
