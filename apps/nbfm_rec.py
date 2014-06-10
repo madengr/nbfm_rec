@@ -82,9 +82,9 @@ class MyTopBlock(gr.top_block):
         parser.add_option("-v", "--verbose", action="store_true",
                           dest="verbose", default=False,
                           help="print settings to stdout")
-        parser.add_option("-a", "--address", type="string", dest="src_addr",
+        parser.add_option("-a", "--args", type="string", dest="src_args",
                           default='addr=192.168.1.13',
-                          help="USRP address string")
+                          help="USRP device address args")
         parser.add_option("-g", "--gain", type="eng_float", dest="src_gain",
                           default=0, help="USRP gain in dB")
         parser.add_option("-q", "--squelch", type="eng_float",
@@ -104,14 +104,14 @@ class MyTopBlock(gr.top_block):
             raise SystemExit, 1
 
         # Define the user constants
-        src_addr = str(options.src_addr)
+        src_args = str(options.src_args)
         src_gain = float(options.src_gain)
         squelch_thresh = float(options.squelch_thresh)
         snd_card_rate = int(options.snd_card_rate)
         channel_file_name = str(options.channel_file_name)
 
         # Define other constants (don't mess with these)
-        max_rf_bandwidth = 25E6
+        max_rf_bandwidth = 25E6 # Limited by N210
         channel_sample_rate = 20000
         nbfm_maxdev = 2.5E3
         nbfm_tau = 75E-6
@@ -145,8 +145,8 @@ class MyTopBlock(gr.top_block):
         # to be an integer multiple of channel sample rate
         src_sample_rate = max_rf_bandwidth / src_decimation
         while ((src_decimation%2 != 0) or \
-            ((25E6/src_decimation) % channel_sample_rate != 0)) and \
-            src_decimation > 1:
+            ((max_rf_bandwidth/src_decimation) % channel_sample_rate != 0)) \
+            and src_decimation > 1:
             src_decimation = src_decimation - 1
             src_sample_rate = max_rf_bandwidth / src_decimation
 
@@ -159,7 +159,7 @@ class MyTopBlock(gr.top_block):
 
         # Print some info to stdout for verbose option
         if options.verbose:
-            print 'Source address string "%s" ' % src_addr
+            print 'Source args string "%s" ' % src_args
             print 'Source center frequency = %f MHz' % (src_center_freq/1E6)
             print 'Source decimation = %i' % src_decimation
             print 'Source sample rate = %i Hz' % src_sample_rate
@@ -171,7 +171,7 @@ class MyTopBlock(gr.top_block):
             print 'Channel list = %s' % str(chanlist)
 
         # Setup the source
-        src = uhd.usrp_source(src_addr, uhd.io_type_t.COMPLEX_FLOAT32, 1)
+        src = uhd.usrp_source(src_args, uhd.io_type_t.COMPLEX_FLOAT32, 1)
         src.set_samp_rate(src_sample_rate)
         src.set_center_freq(src_center_freq, 0)
         src.set_gain(src_gain, 0)
