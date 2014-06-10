@@ -3,7 +3,7 @@ nbfm_rec.py
 
 Multi-channel narrow-band FM recorder for GNU Radio
 
-Author: Louis Brown KD4HSO
+Author: Louis Brown, KD4HSO
 
 Features:
 - Parallel demodulation and recording of NBFM radio channels
