@@ -6,11 +6,11 @@ Created on Sat Mar 22 17:53:32 2014
 """
 #
 # nbfm_rec.py for GNU Radio 3.7
-# Louis Brown (rfengr@everestkc.net)
-# 3/22/2014
+# Louis Brown, KD4HSO
+# 6/10/2014
 #
 # Program to monitor and record multiple NBFM channels.
-# Program has been tested on the USRP N210, UHD driver, WBX daughter board.
+# Program has been tested on the Ettus N210 + WBX, and Ettus B200.
 # Channel list is read from newline delimited text file.
 # Channels must fall within sampling rate of USRP.
 # USRP samples are streamed to N parallel demodulator chains.
