@@ -30,6 +30,8 @@ Keep adding channels as long as they are within the 25 MHz sample rate
 supported by the USRP, and your processor can handle the load.
 Running volk_profile will make a big difference.
 
+May need to adjust the gain and squelch values depending on the hardware.
+
 Use with the Ettus N210 + WBX:
 *./nbfm_rec.py --args="addr=168.1.13" --gain=10 -v*
 
